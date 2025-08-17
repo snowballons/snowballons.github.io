@@ -1,0 +1,8 @@
+baseURL = "https://example.netlify.app/"
+languageCode = "en-us"
+title = "John Okeno — Jonnie Brown"
+paginate = 10
+
+[params]
+  # we’ll use these later for toggles (comments/search/etc.)
+  disableComments = false
