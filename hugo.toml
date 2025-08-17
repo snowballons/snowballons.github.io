@@ -1,6 +1,8 @@
 baseURL = "https://snowballons.netlify.app/"
 languageCode = "en-us"
 title = "John Okeno — Jonnie Brown"
+theme = "PaperMod"
+
 
 [pagination]
   pagerSize = 10
