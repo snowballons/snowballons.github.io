@@ -1,12 +1,44 @@
+
 baseURL = "https://snowballons.netlify.app/"
-languageCode = "en-us"
-title = "John Okeno — Jonnie Brown"
+title = "John — Personal Website"
 theme = "PaperMod"
 
-
-[pagination]
-  pagerSize = 10
-
 [params]
-  # we’ll use these later for toggles (comments/search/etc.)
-  disableComments = false
+  defaultTheme = "auto"   # light/dark auto
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+
+[menu]
+
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "Blog"
+    url = "/posts/"
+    weight = 2
+
+  [[menu.main]]
+    name = "Services"
+    url = "/services/"
+    weight = 3
+
+  [[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 4
+
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 5
+
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 6
