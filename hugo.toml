@@ -1,7 +1,9 @@
-baseURL = "https://example.netlify.app/"
+baseURL = "https://snowballons.netlify.app/"
 languageCode = "en-us"
 title = "John Okeno — Jonnie Brown"
-paginate = 10
+
+[pagination]
+  pagerSize = 10
 
 [params]
   # we’ll use these later for toggles (comments/search/etc.)
