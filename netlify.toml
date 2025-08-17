@@ -3,5 +3,5 @@
   publish = "public"
 
 [build.environment]
-  # set this to match your local `hugo version` (Extended) to avoid build mismatches
-  HUGO_VERSION = "YOUR_LOCAL_VERSION"
+  HUGO_VERSION = "0.148.2"
+  HUGO_ENV = "production"
