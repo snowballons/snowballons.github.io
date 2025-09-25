@@ -3,6 +3,11 @@ baseURL = "https://snowballons.netlify.app/"
 title = "Jonnie Brown — Software Engineer & Business Analyst"
 theme = "PaperMod"
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 [params]
   defaultTheme = "auto"   # light/dark auto
   ShowReadingTime = true
