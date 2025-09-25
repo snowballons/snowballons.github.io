@@ -2,10 +2,6 @@
 title: "Projects"
 ---
 
-# Projects
-
-Software solutions I've built, from CLI tools to web applications.
-
 <div class="projects-grid">
 
 <div class="project-card">
