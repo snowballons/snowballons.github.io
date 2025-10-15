@@ -1,19 +1,20 @@
+// tina/config.js
 import { defineConfig } from "tinacms";
-
-export default defineConfig({
+var config_default = defineConfig({
   branch: "main",
-  clientId: "eaf14aa4-251d-4bbf-8813-448dc87b9274", // Get this from tina.io
-  token: null, // Get this from tina.io
-
+  clientId: "eaf14aa4-251d-4bbf-8813-448dc87b9274",
+  // Get this from tina.io
+  token: null,
+  // Get this from tina.io
   build: {
     outputFolder: "admin",
-    publicFolder: "static",
+    publicFolder: "static"
   },
   media: {
     tina: {
       mediaRoot: "uploads",
-      publicFolder: "static",
-    },
+      publicFolder: "static"
+    }
   },
   schema: {
     collections: [
@@ -27,32 +28,32 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
+            required: true
           },
           {
             type: "datetime",
             name: "date",
             label: "Date",
-            required: true,
+            required: true
           },
           {
             type: "boolean",
             name: "draft",
-            label: "Draft",
+            label: "Draft"
           },
           {
             type: "string",
             name: "tags",
             label: "Tags",
-            list: true,
+            list: true
           },
           {
             type: "rich-text",
             name: "body",
             label: "Body",
-            isBody: true,
-          },
-        ],
+            isBody: true
+          }
+        ]
       },
       {
         name: "project",
@@ -64,28 +65,31 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
+            required: true
           },
           {
             type: "datetime",
             name: "date",
             label: "Date",
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "tags",
             label: "Tags",
-            list: true,
+            list: true
           },
           {
             type: "rich-text",
             name: "body",
             label: "Body",
-            isBody: true,
-          },
-        ],
-      },
-    ],
-  },
+            isBody: true
+          }
+        ]
+      }
+    ]
+  }
 });
+export {
+  config_default as default
+};

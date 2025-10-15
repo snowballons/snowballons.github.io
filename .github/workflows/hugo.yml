@@ -45,6 +45,7 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
         run: |
           npm run build          
       - name: Generate search index
