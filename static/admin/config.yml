@@ -1,7 +1,7 @@
 
 backend:
   name: github
-  repo: snowballons/snowballons-site
+  repo: snowballons/snowballons.github.io
   branch: main
 
 media_folder: "static/uploads"
