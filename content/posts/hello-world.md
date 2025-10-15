@@ -1,8 +1,9 @@
 ---
-title: Hello World
-date: 2025-08-17T13:38:42+03:00
-draft: false
+title: Hello, World!
 ---
-## Main website
 
-i am a software developer who create software like extensions, web apps, etc. i want to create my main website that contains info about the developers, how core mission, what we stand for, the future we are building and our progress in providing solutions. this main website will be our brand, contact developers, work with developers, seek solutions etc. for example if i create a web extension, i can create a subdomain for the extension from our main domain and host the site as required, static page or full website. 
+## Hello World!
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non lorem diam. Quisque vulputate nibh sodales eros pretium tincidunt. Aenean porttitor efficitur convallis. Nulla sagittis finibus convallis. Phasellus in fermentum quam, eu egestas tortor. Maecenas ac mollis leo. Integer maximus eu nisl vel sagittis.
+
+Suspendisse facilisis, mi ac scelerisque interdum, ligula ex imperdiet felis, a posuere eros justo nec sem. Nullam laoreet accumsan metus, sit amet tincidunt orci egestas nec. Pellentesque ut aliquet ante, at tristique nunc. Donec non massa nibh. Ut posuere lacus non aliquam laoreet. Fusce pharetra ligula a felis porttitor, at mollis ipsum maximus. Donec quam tortor, vehicula a magna sit amet, tincidunt dictum enim. In hac habitasse platea dictumst. Mauris sit amet ornare ligula, blandit consequat risus. Duis malesuada pellentesque lectus, non feugiat turpis eleifend a. Nullam tempus ante et diam pretium, ac faucibus ligula interdum.
