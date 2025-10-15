@@ -1,10 +1,6 @@
-
 backend:
-  name: github
-  repo: snowballons/snowballons.github.io
+  name: git-gateway
   branch: main
-  base_url: https://decap-cms-oauth-provider.netlify.app
-  auth_endpoint: auth
 
 media_folder: "static/uploads"
 public_folder: "/uploads"
