@@ -46,9 +46,16 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
           NEXT_PUBLIC_TINA_CLIENT_ID: eaf14aa4-251d-4bbf-8813-448dc87b9274
-          TINA_TOKEN: f309ad3b15e8a456f91236fe1a682d4d1c024d1d
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+          TINA_SEARCH_TOKEN: ${{ secrets.TINA_SEARCH_TOKEN }}
         run: |
-          npm run build          
+          npm run build
+      - name: Reindex TinaCloud
+        run: |
+          curl -X POST https://content.tinajs.io/index \
+          -H "Authorization: Bearer ${{ secrets.TINA_SEARCH_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"clientId": "eaf14aa4-251d-4bbf-8813-448dc87b9274", "branch": "main"}'          
       - name: Generate search index
         run: npx pagefind --site public
       - name: Upload artifact
