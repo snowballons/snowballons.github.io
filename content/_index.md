@@ -1,9 +1,9 @@
 ---
-title: "Welcome"
+title: "About Me"
 ---
 
-# Hi, I'm Jonnie Brown 👋
+I love building software, finding smart ways to solve problems, and turning messy processes into smooth, automated systems. I'm all about learning, creating, and connecting with people who enjoy building cool things that make a difference.
 
-Software engineer, business analyst, and data enthusiast passionate about creating solutions that matter.
+Feel free to show your support by giving me a star ⭐ on GitHub and sharing with your friends and social media.
 
-I build software, analyze data, and explore business automation. This is where I share my work, insights, and collaborate with like-minded professionals worldwide.
+This site represents my passions: creating software, sharing knowledge, offering services, and collaborating on meaningful projects.

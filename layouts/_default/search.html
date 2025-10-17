@@ -1,0 +1,166 @@
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>Search 🔍</h1>
+</header>
+
+<div class="search-container">
+  <input type="text" id="search-input" placeholder="Search site with full text fuzzy search ..." />
+  <div id="search-results"></div>
+</div>
+
+<script>
+// Full text fuzzy search implementation
+let searchIndex = [];
+
+// Build search index from all content
+async function buildSearchIndex() {
+  try {
+    const response = await fetch('/index.json');
+    searchIndex = await response.json();
+  } catch (error) {
+    console.error('Failed to load search index:', error);
+  }
+}
+
+// Simple fuzzy search function
+function fuzzySearch(query, text) {
+  const queryLower = query.toLowerCase();
+  const textLower = text.toLowerCase();
+  
+  // Exact match gets highest score
+  if (textLower.includes(queryLower)) return 100;
+  
+  // Character matching with gaps allowed
+  let queryIndex = 0;
+  let matches = 0;
+  
+  for (let i = 0; i < textLower.length && queryIndex < queryLower.length; i++) {
+    if (textLower[i] === queryLower[queryIndex]) {
+      matches++;
+      queryIndex++;
+    }
+  }
+  
+  return queryIndex === queryLower.length ? (matches / query.length) * 50 : 0;
+}
+
+// Search function
+function performSearch(query) {
+  if (query.length < 2) return [];
+  
+  const results = searchIndex
+    .map(item => {
+      const titleScore = fuzzySearch(query, item.title || '');
+      const contentScore = fuzzySearch(query, item.content || '') * 0.7;
+      const tagsScore = fuzzySearch(query, (item.tags || []).join(' ')) * 0.5;
+      
+      return {
+        ...item,
+        score: Math.max(titleScore, contentScore, tagsScore)
+      };
+    })
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 10);
+    
+  return results;
+}
+
+// Initialize search
+document.addEventListener('DOMContentLoaded', async () => {
+  await buildSearchIndex();
+  
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  
+  let debounceTimer;
+  
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(debounceTimer);
+    const query = e.target.value.trim();
+    
+    if (query.length < 2) {
+      searchResults.innerHTML = '';
+      return;
+    }
+    
+    debounceTimer = setTimeout(() => {
+      const results = performSearch(query);
+      
+      if (results.length > 0) {
+        searchResults.innerHTML = results
+          .map(result => `
+            <div class="search-result">
+              <h3><a href="${result.permalink}">${result.title}</a></h3>
+              <p>${result.summary || result.content?.substring(0, 150) + '...' || ''}</p>
+              <small>${result.date ? new Date(result.date).toLocaleDateString() : ''}</small>
+            </div>
+          `)
+          .join('');
+      } else {
+        searchResults.innerHTML = '<div class="no-results">No results found</div>';
+      }
+    }, 300);
+  });
+});
+</script>
+
+<style>
+.search-container {
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+#search-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--theme);
+  color: var(--primary);
+  margin-bottom: 2rem;
+}
+
+#search-input:focus {
+  outline: none;
+  border-color: var(--tertiary);
+}
+
+.search-result {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+
+.search-result h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.search-result h3 a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.search-result h3 a:hover {
+  color: var(--tertiary);
+}
+
+.search-result p {
+  margin: 0.5rem 0;
+  color: var(--secondary);
+}
+
+.search-result small {
+  color: var(--tertiary);
+}
+
+.no-results {
+  text-align: center;
+  padding: 2rem;
+  color: var(--secondary);
+}
+</style>
+
+{{- end }}

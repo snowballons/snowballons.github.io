@@ -1,7 +1,10 @@
 
 baseURL = "https://snowballons.github.io/"
-title = "Jonnie Brown — Software Engineer & Business Analyst"
+title = "Snowballons"
 theme = "PaperMod"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
 [markup]
   [markup.goldmark]
@@ -9,41 +12,64 @@ theme = "PaperMod"
       unsafe = true
 
 [params]
-  defaultTheme = "auto"   # light/dark auto
+  defaultTheme = "auto"
   ShowReadingTime = true
   ShowShareButtons = true
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
+  
+  # Site label
+  [params.label]
+    text = "Snowballons"
+  
+  # Homepage profile mode
+  [params.profileMode]
+    enabled = true
+    title = "About Me"
+    subtitle = "Hey, I'm John O. 👋 I'm a software engineer and business analyst from Kenya. My work and curiosity take me everywhere. Online, I go by Snowballons, where I share ideas about tech, business, and data."
+    imageUrl = ""
+    imageTitle = "Snowballons"
+    
+    [[params.profileMode.buttons]]
+      name = "Blog"
+      url = "/posts"
+    [[params.profileMode.buttons]]
+      name = "Projects"
+      url = "/projects"
+
+  # Social icons
+  [[params.socialIcons]]
+    name = "X"
+    url = "https://x.com/SnowballonsB"
+  [[params.socialIcons]]
+    name = "LinkedIn"
+    url = "https://ke.linkedin.com/in/johnokeno"
+  [[params.socialIcons]]
+    name = "GitHub"
+    url = "https://github.com/snowballons"
+  [[params.socialIcons]]
+    name = "BuyMeACoffee"
+    url = "https://buymeacoffee.com/snowballons"
 
 [menu]
-
-  [[menu.main]]
-    name = "Home"
-    url = "/"
-    weight = 1
-
   [[menu.main]]
     name = "Blog"
     url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    name = "Search"
+    url = "/search/"
     weight = 2
-
   [[menu.main]]
     name = "Services"
     url = "/services/"
     weight = 3
-
   [[menu.main]]
     name = "Projects"
     url = "/projects/"
     weight = 4
-
-  [[menu.main]]
-    name = "About"
-    url = "/about/"
-    weight = 5
-
   [[menu.main]]
     name = "Contact"
     url = "/contact/"
-    weight = 6
+    weight = 5
