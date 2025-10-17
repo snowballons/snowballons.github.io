@@ -1,44 +1,20 @@
-const TINA_SEARCH_TOKEN = '077f1ce557fd69e29efbbf6708655450eeeb2c6a';
-
-async function searchPosts(query) {
+async function searchContent(query) {
   if (query.length < 2) return [];
   
   try {
-    const response = await fetch('https://content.tinajs.io/graphql', {
+    const response = await fetch('https://content.tinajs.io/1.6/content/eaf14aa4-251d-4bbf-8813-448dc87b9274/github/main/search', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${TINA_SEARCH_TOKEN}`,
+        'Authorization': 'Bearer 077f1ce557fd69e29efbbf6708655450eeeb2c6a',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        query: `
-          query SearchPosts($filter: PostFilter) {
-            postConnection(filter: $filter) {
-              edges {
-                node {
-                  title
-                  _sys {
-                    filename
-                  }
-                }
-              }
-            }
-          }
-        `,
-        variables: {
-          filter: {
-            title: {
-              contains: query
-            }
-          }
-        }
-      })
+      body: JSON.stringify({ query })
     });
 
     const data = await response.json();
-    return data.data?.postConnection?.edges || [];
+    return data.results || [];
   } catch (error) {
-    console.error('TinaCMS search error:', error);
+    console.error('Search error:', error);
     return [];
   }
 }
@@ -62,15 +38,18 @@ function initTinaSearch() {
     }
     
     debounceTimer = setTimeout(async () => {
-      const posts = await searchPosts(query);
+      const results = await searchContent(query);
       
-      if (posts.length > 0) {
-        searchResults.innerHTML = posts
-          .map(({ node }) => 
-            `<div class="tina-search-result">
-              <a href="/posts/${node._sys.filename}/">${node.title}</a>
-            </div>`
-          )
+      if (results.length > 0) {
+        searchResults.innerHTML = results
+          .slice(0, 5)
+          .map(result => {
+            const title = result.document?.title || result.title || 'Untitled';
+            const filename = result.document?._sys?.filename || result.id;
+            return `<div class="tina-search-result">
+              <a href="/posts/${filename}/">${title}</a>
+            </div>`;
+          })
           .join('');
         searchResults.style.display = 'block';
       } else {
@@ -80,7 +59,6 @@ function initTinaSearch() {
     }, 300);
   });
 
-  // Hide results when clicking outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.tina-search-container')) {
       searchResults.style.display = 'none';
@@ -88,7 +66,6 @@ function initTinaSearch() {
   });
 }
 
-// Initialize when DOM is loaded
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initTinaSearch);
 } else {

@@ -15,6 +15,14 @@ var config_default = defineConfig({
       publicFolder: "static"
     }
   },
+  search: {
+    tina: {
+      indexerToken: process.env.TINA_SEARCH_TOKEN,
+      stopwordLanguages: ["eng"]
+    },
+    indexBatchSize: 100,
+    maxSearchIndexFieldLength: 200
+  },
   schema: {
     collections: [
       {
@@ -33,7 +41,8 @@ var config_default = defineConfig({
             type: "rich-text",
             name: "body",
             label: "Body",
-            isBody: true
+            isBody: true,
+            maxSearchIndexFieldLength: 500
           }
         ]
       }

@@ -1,6 +1,5 @@
 import { defineConfig } from "tinacms";
 
-// Your hosting provider likely exposes this as an environment variable
 const branch =
   process.env.GITHUB_BRANCH ||
   process.env.VERCEL_GIT_COMMIT_REF ||
@@ -22,6 +21,14 @@ export default defineConfig({
       publicFolder: "static",
     },
   },
+  search: {
+    tina: {
+      indexerToken: process.env.TINA_SEARCH_TOKEN,
+      stopwordLanguages: ['eng'],
+    },
+    indexBatchSize: 100,
+    maxSearchIndexFieldLength: 200,
+  },
   schema: {
     collections: [
       {
@@ -41,6 +48,7 @@ export default defineConfig({
             name: "body",
             label: "Body",
             isBody: true,
+            maxSearchIndexFieldLength: 500,
           },
         ],
       },
